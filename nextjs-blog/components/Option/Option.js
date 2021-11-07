@@ -2,15 +2,33 @@ import React from 'react'
 
 import { useRouter } from 'next/router'
 
-const Option = () => {
+const Option = ({from, to, depart, arrive, duration, transport, co2e, price}) => {
 
     const router = useRouter();
+
+    const isGood = co2e > 75 ? true : false;
+
+    price = price ? price : "$ ??"
+
+    const handleClick = (e) => {
+
+        e.preventDefault()
+        router.push({
+            pathname: '/comparison',
+            query: {
+                from: "edi",
+                to: "lhr",
+                depart: "01/12/2021",
+            }
+        })
+
+    }
 
     return (
         <div className="container">
 
             <div className="green-banner">
-                <p>20% less carbon emission than the average search</p>
+                <p><span className="bold">{co2e}%</span> less carbon emission than the average search</p>
             </div>
 
             <div className="option">
@@ -19,23 +37,23 @@ const Option = () => {
 
                     <div className="col-1">
                         
-                        <p className="depart">17:30</p>
-                        <p className="from">EDI</p>
+                        <p className="date depart">{depart}</p>
+                        <p className="from">{from}</p>
 
                     </div>
 
                     <div className="col-2">
 
-                        <p className="duration">2 hr 30 min</p>
+                        <p className="duration">{duration}</p>
                         <div className="arrow"></div>
-                        <span className="transport">Car</span>
+                        <span className="transport">{transport}</span>
                         
                     </div>
 
                     <div className="col-3">
 
-                        <p className="arrive">22:00</p>
-                        <p className="to">LHR</p>
+                        <p className="date arrive">{arrive}</p>
+                        <p className="to">{to}</p>
 
                     </div>
 
@@ -44,11 +62,11 @@ const Option = () => {
                 <div className="right-col">
 
                     <div className="price">
-                        <p>RM20</p>
+                        <p>{price}</p>
                     </div>
 
                     <div className="select-btn">
-                        <button type="button">SELECT</button>
+                        <button type="button" onClick={handleClick}>SELECT</button>
                     </div>
 
                 </div>
@@ -76,7 +94,7 @@ const Option = () => {
                 .green-banner p {
                     display: inline;
                     padding: 5px 10px;
-                    background-color: #62FC65;
+                    background-color: ${isGood ? '#62FC65' : '#FFD700'};
                     font-size: 12px;
                 }
 
@@ -98,6 +116,12 @@ const Option = () => {
 
                 .right-col {
 
+                }
+
+                .price p {
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                    font-size: 20px;
                 }
 
                 .left-col col-2 {
@@ -129,6 +153,14 @@ const Option = () => {
                     color: white;
                     font-weight: bold;
                     font-size: 16px;
+                }
+
+                .date {
+                    font-weight: 600;
+                }
+
+                .bold {
+                    font-weight: 600;
                 }
 
             `}</style>

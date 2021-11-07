@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 const SearchBarOnly = () => {
 
-    const router = useRouter;
+    const router = useRouter();
 
     const handleClick = (e) => {
 

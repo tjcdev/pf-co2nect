@@ -10,7 +10,15 @@ const result = () => {
 
             <SearchBarOnly />
             <div className="height"></div>
-            <Option />
+            <Option 
+                from="EDI" 
+                to="LHR" 
+                duration="2 hr 30 min" 
+                depart="17:30" 
+                arrive="22:00" 
+                transport="Car"
+                price="$ 99" 
+                co2e={30}/>
             <Option />
             <Option />
             <Option />
